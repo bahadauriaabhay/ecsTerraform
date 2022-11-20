@@ -1,8 +1,3 @@
-#resource "aws_placement_group" "test" {
-#  name     = "test"
-#  strategy = "cluster"
-#}
-
 resource "aws_autoscaling_group" "bar" {
   name                      = "foobar3-terraform-test"
   max_size                  = 3
@@ -11,11 +6,8 @@ resource "aws_autoscaling_group" "bar" {
   health_check_type         = "ELB"
   desired_capacity          = 1
   force_delete              = true
- # placement_group           = aws_placement_group.test.id
   launch_configuration      = aws_launch_configuration.as_conf.name
   vpc_zone_identifier       = [aws_subnet.public_us_east_1a.id, aws_subnet.public_us_east_1b.id]
-# target_group_arns         = [aws_lb_target_group.test.arn]
-
 }
 
 resource "aws_launch_configuration" "as_conf" {
